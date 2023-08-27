@@ -12,8 +12,8 @@ export default {
   name: 'App',
   created() {
     console.log('进来了111111')
-    localStorage.setItem('AccessTokenKey', 'sdaasdadfgyiuasdghasdkhjasdjklajdklakjl')
-    localStorage.setItem('RefreshTokenKey', 'sdsdsaddsadssdasdw2weawwa')
+    // localStorage.setItem('AccessTokenKey', 'sdaasdadfgyiuasdghasdkhjasdjklajdklakjl')
+    // localStorage.setItem('RefreshTokenKey', 'sdsdsaddsadssdasdw2weawwa')
   }
 }
 </script>
