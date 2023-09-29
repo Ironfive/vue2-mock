@@ -68,3 +68,6 @@ Mock.mock(
     };
   }
 );
+Mock.mock("/mockTest/getData", "get", (data) => {
+  return users;
+});

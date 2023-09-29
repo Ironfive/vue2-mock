@@ -1,22 +1,32 @@
 <template>
   <div>
-    <quill-editor
-        v-model="content"
-        ref="myQuillEditor"
-        :options="editorOption"
-        @blur="onEditorBlur($event)"
-        @focus="onEditorFocus($event)"
-        @change="onEditorChange($event)"
-        @ready="onEditorReady($event)"></quill-editor>
-    <el-upload
-        class="upload-demo"
-        :action="uploadurl"
-        :on-success="handleSuccess"
-        :before-upload="beforeUpload"
-        :file-list="fileList"
-    >
-      <el-button size="small" type="primary">点击上传视频</el-button>
-    </el-upload>
+    <!--    <quill-editor-->
+    <!--        v-model="content"-->
+    <!--        ref="myQuillEditor"-->
+    <!--        :options="editorOption"-->
+    <!--        @blur="onEditorBlur($event)"-->
+    <!--        @focus="onEditorFocus($event)"-->
+    <!--        @change="onEditorChange($event)"-->
+    <!--        @ready="onEditorReady($event)"></quill-editor>-->
+    <!--    <el-upload-->
+    <!--        class="upload-demo"-->
+    <!--        :action="uploadurl"-->
+    <!--        :on-success="handleSuccess"-->
+    <!--        :before-upload="beforeUpload"-->
+    <!--        :file-list="fileList"-->
+    <!--    >-->
+    <!--      <el-button size="small" type="primary">点击上传视频</el-button>-->
+    <!--    </el-upload>-->
+    <!--    <el-input v-model="value" @input="getData"></el-input>-->
+    <!--    <org-select-list v-model="value" clearable filterable></org-select-list>-->
+    <!--    <el-table-list></el-table-list>-->
+    <virutal-table :data="historyDataTables">
+      <el-table-column label="序号" align="center" type="index" show-overflow-tooltip width="100">
+        <template slot-scope="scope"><span>{{ scope.row.keyIndex }}</span></template>
+      </el-table-column>
+      <el-table-column prop="sampleTime" width="170" label="时间" align="center" show-overflow-tooltip></el-table-column>
+      <el-table-column prop="level" label="水质" align="center" show-overflow-tooltip></el-table-column>
+    </virutal-table>
   </div>
 </template>
 
@@ -25,14 +35,23 @@ import {quillEditor} from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+import OrgSelectList from "@/components/OrgSelectList";
+import axios from "axios";
+import ElTableList from "@/components/ElTableList";
+import VirutalTable from "@/components/Table/VirutalTable";
+import moment from "moment";
 
 export default {
   name: "root",
   components: {
     quillEditor,
+    OrgSelectList,
+    ElTableList,
+    VirutalTable
   },
   data() {
     return {
+      value: 1111,
       uploadurl: 'http://localhost:3000/upload',
       content: '',
       // 富文本编辑器配置
@@ -58,9 +77,26 @@ export default {
         placeholder: '请输入正文'
       },
       fileList: [], // 存储已上传的文件
+      control: null,
+      historyDataTables: []
     }
   },
+  created() {
+    this.getTableList()
+  },
   methods: {
+    async getData() {
+      this.control && this.control.abort()
+      this.control = new AbortController();
+      try {
+        let res = await axios.get('/mockTest/getData', {
+          signal: this.control.signal
+        })
+      } catch {
+        console.log('abort')
+      }
+
+    },
     // 失去焦点事件
     onEditorBlur(quill) {
       console.log('editor blur!', quill)
@@ -93,6 +129,16 @@ export default {
       this.$message.success('上传成功');
       // 在 fileList 中添加上传成功的文件
       this.fileList.push(file);
+    },
+    async getTableList() {
+      await axios.get("https://www.fastmock.site/mock/2a8d1bce05f2ad2b9345ae1928e40a9a/api/getTableData").then((res) => {
+        if (res.data.code == 200) {
+          this.historyDataTables = res.data.rows;
+          this.historyDataTables.forEach((item, index) => {
+            this.$set(item, 'keyIndex', index + 1)
+          })
+        }
+      });
     },
   }
 }
