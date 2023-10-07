@@ -20,13 +20,32 @@
     <!--    <el-input v-model="value" @input="getData"></el-input>-->
     <!--    <org-select-list v-model="value" clearable filterable></org-select-list>-->
     <!--    <el-table-list></el-table-list>-->
-    <virutal-table :data="historyDataTables">
-      <el-table-column label="序号" align="center" type="index" show-overflow-tooltip width="100">
-        <template slot-scope="scope"><span>{{ scope.row.keyIndex }}</span></template>
-      </el-table-column>
-      <el-table-column prop="sampleTime" width="170" label="时间" align="center" show-overflow-tooltip></el-table-column>
-      <el-table-column prop="level" label="水质" align="center" show-overflow-tooltip></el-table-column>
-    </virutal-table>
+    <el-form :model="formData" :rules="formRules">
+      <virutal-table :data="formData.historyDataTables">
+
+        <el-table-column prop="sampleTime" width="300" label="时间" align="center" show-overflow-tooltip>
+          <template slot-scope="scope">
+            <el-form-item :prop="'historyDataTables.' + scope.$index + '.sampleTime'" :rules="formRules.sampleTime">
+              <el-input v-model="scope.row.sampleTime" clearable style="width: 100%"></el-input>
+            </el-form-item>
+          </template>
+        </el-table-column>
+        <el-table-column prop="level" label="水质" align="center" show-overflow-tooltip>
+          <template slot-scope="scope">
+            <el-form-item :prop="'historyDataTables.' + scope.$index + '.level'" :rules="formRules.level">
+              <el-select v-model="scope.row.level" placeholder="请选择" clearable style="width: 100%;">
+                <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </template>
+        </el-table-column>
+      </virutal-table>
+    </el-form>
   </div>
 </template>
 
@@ -51,6 +70,70 @@ export default {
   },
   data() {
     return {
+      options: [{
+        value: '选项1',
+        label: '黄金糕'
+      }, {
+        value: '选项2',
+        label: '双皮奶'
+      }, {
+        value: '选项3',
+        label: '蚵仔煎'
+      }, {
+        value: '选项4',
+        label: '龙须面'
+      }, {
+        value: '选项5',
+        label: '北京烤鸭'
+      },
+        {
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        },
+        {
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        },
+        {
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }],
       value: 1111,
       uploadurl: 'http://localhost:3000/upload',
       content: '',
@@ -78,7 +161,13 @@ export default {
       },
       fileList: [], // 存储已上传的文件
       control: null,
-      historyDataTables: []
+      formData: {
+        historyDataTables: []
+      },
+      formRules: {
+        sampleTime: [{required: true, message: '请输入活动名称', trigger: ['blur', 'change']},],
+        level: [{required: true, message: '请选择', trigger: ['blur', 'change']},]
+      }
     }
   },
   created() {
@@ -133,8 +222,8 @@ export default {
     async getTableList() {
       await axios.get("https://www.fastmock.site/mock/2a8d1bce05f2ad2b9345ae1928e40a9a/api/getTableData").then((res) => {
         if (res.data.code == 200) {
-          this.historyDataTables = res.data.rows;
-          this.historyDataTables.forEach((item, index) => {
+          this.formData.historyDataTables = res.data.rows;
+          this.formData.historyDataTables.forEach((item, index) => {
             this.$set(item, 'keyIndex', index + 1)
           })
         }
