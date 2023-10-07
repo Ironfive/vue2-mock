@@ -15,6 +15,9 @@
           :max-height="tableHeight"
           :row-key="(row) => row.id"
           ref="vTable">
+
+        <el-table-column label="序号" align="center" type="index" show-overflow-tooltip width="100">
+        </el-table-column>
         <slot/>
         <div slot="append">
           <el-divider>到底了~</el-divider>
@@ -67,6 +70,7 @@ export default {
   methods: {
     // 虚拟列表的数据
     onChange(renderData, start, end) {
+      debugger
       this.startIndex = start; // 需要添加startIndex,真实的index = this.startIndex + rowIndex
       this.virtualList = renderData;
     },
