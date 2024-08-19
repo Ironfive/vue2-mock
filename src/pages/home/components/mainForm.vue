@@ -209,7 +209,7 @@
                   </el-table-column>
                 </el-table>
               </div>
-              <el-button type="primary" @click="rotateTo('/caculateResult')">进行测算</el-button>
+              <el-button type="primary" @click="showUserInfo = true">进行测算</el-button>
 
             </el-form-item>
           </el-col>
@@ -218,16 +218,19 @@
       </el-form>
       </div>
     </el-dialog>
+    <user-info :visible.sync="showUserInfo"></user-info>
   </div>
 </template>
 
 <script>
 import  regionCascader from '@/components/regionCascader/regionCascader.vue'
 import getCurrentCityName from "@/utils/myBMap.js";
+import userInfo from '@/pages/home/components/userInfo.vue'
 export default {
   name: "mainForm",
   components:{
-    regionCascader
+    regionCascader,
+    userInfo
   },
   props:{
     visible:{
@@ -237,6 +240,7 @@ export default {
   },
   data(){
     return{
+      showUserInfo:false,
       formValues:{
         area:[],
         electricityUsageType:'',
