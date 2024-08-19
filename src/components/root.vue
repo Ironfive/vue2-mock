@@ -1,5 +1,14 @@
 <template>
   <div>
+    <el-cascader
+        @change="handleSelectChange"
+        size="large"
+        :options="pcTextArr"
+        v-model="selectedOptions"
+        clearable
+        filterable
+    >
+    </el-cascader>
     <!--    <quill-editor-->
     <!--        v-model="content"-->
     <!--        ref="myQuillEditor"-->
@@ -20,36 +29,45 @@
     <!--    <el-input v-model="value" @input="getData"></el-input>-->
     <!--    <org-select-list v-model="value" clearable filterable></org-select-list>-->
     <!--    <el-table-list></el-table-list>-->
-    <el-form :model="formData" :rules="formRules">
-      <virutal-table :data="formData.historyDataTables">
+<!--    <el-form :model="formData" :rules="formRules">-->
+<!--      <virutal-table :data="formData.historyDataTables">-->
 
-        <el-table-column prop="sampleTime" width="300" label="时间" align="center" show-overflow-tooltip>
-          <template slot-scope="scope">
-            <el-form-item :prop="'historyDataTables.' + scope.$index + '.sampleTime'" :rules="formRules.sampleTime">
-              <el-input v-model="scope.row.sampleTime" clearable style="width: 100%"></el-input>
-            </el-form-item>
-          </template>
-        </el-table-column>
-        <el-table-column prop="level" label="水质" align="center" show-overflow-tooltip>
-          <template slot-scope="scope">
-            <el-form-item :prop="'historyDataTables.' + scope.$index + '.level'" :rules="formRules.level">
-              <el-select v-model="scope.row.level" placeholder="请选择" clearable style="width: 100%;">
-                <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </template>
-        </el-table-column>
-      </virutal-table>
-    </el-form>
+<!--        <el-table-column prop="sampleTime" width="300" label="时间" align="center" show-overflow-tooltip>-->
+<!--          <template slot-scope="scope">-->
+<!--            <el-form-item :prop="'historyDataTables.' + scope.$index + '.sampleTime'" :rules="formRules.sampleTime">-->
+<!--              <el-input v-model="scope.row.sampleTime" clearable style="width: 100%"></el-input>-->
+<!--            </el-form-item>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
+<!--        <el-table-column prop="level" label="水质" align="center" show-overflow-tooltip>-->
+<!--          <template slot-scope="scope">-->
+<!--            <el-form-item :prop="'historyDataTables.' + scope.$index + '.level'" :rules="formRules.level">-->
+<!--              <el-select v-model="scope.row.level" placeholder="请选择" clearable style="width: 100%;">-->
+<!--                <el-option-->
+<!--                    v-for="item in options"-->
+<!--                    :key="item.value"-->
+<!--                    :label="item.label"-->
+<!--                    :value="item.value">-->
+<!--                </el-option>-->
+<!--              </el-select>-->
+<!--            </el-form-item>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
+<!--      </virutal-table>-->
+<!--    </el-form>-->
   </div>
 </template>
 
 <script>
+import {
+  provinceAndCityData,
+  pcTextArr,
+  regionData,
+  pcaTextArr,
+  codeToText,
+} from "element-china-area-data";
+
+
 import {quillEditor} from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
@@ -70,6 +88,11 @@ export default {
   },
   data() {
     return {
+      pcTextArr,
+      pcaTextArr,
+      regionData,
+      provinceAndCityData,
+      selectedOptions: [],
       options: [{
         value: '选项1',
         label: '黄金糕'
@@ -171,9 +194,13 @@ export default {
     }
   },
   created() {
-    this.getTableList()
+    // this.getTableList()
   },
   methods: {
+    handleSelectChange(){
+      debugger
+      console.log(this.regionData,this.selectedOptions,222222)
+    },
     async getData() {
       this.control && this.control.abort()
       this.control = new AbortController();

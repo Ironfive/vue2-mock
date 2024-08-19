@@ -1,0 +1,229 @@
+/**
+* cover some element-ui styles
+* 覆盖element-ui部分组件样式
+ */
+
+/** refine element ui table */
+.el-table {
+  .el-table__header-wrapper, .el-table__fixed-header-wrapper {
+    th {
+      word-break: break-word;
+      background-color: #f8f8f9;
+      color: #515a6e;
+      height: 40px;
+      font-size: 12px;
+    }
+  }
+  .el-table__body-wrapper {
+    .el-button [class*="el-icon-"] + span {
+      margin-left: 1px;
+    }
+  }
+  .el-table__empty-block{
+      display: none;
+  }
+}
+
+/** refine element ui breadcrumb */
+.el-breadcrumb__inner,
+.el-breadcrumb__inner a {
+  font-weight: 400 !important;
+}
+.customForm{
+  .el-form{
+    .el-form-item__label{
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 22px;
+    }
+  }
+}
+
+
+
+/** refine element ui cell */
+.cell {
+  .el-tag {
+    margin-right: 0px;
+  }
+}
+
+.status-col {
+  .cell {
+    padding: 0 10px;
+    text-align: center;
+
+    .el-tag {
+      margin-right: 0px;
+    }
+  }
+}
+
+
+
+/** refine element ui upload */
+.el-upload {
+  input[type="file"] {
+    display: none !important;
+  }
+}
+
+.el-upload__input {
+  display: none;
+}
+
+.upload-container {
+  .el-upload {
+    width: 100%;
+
+    .el-upload-dragger {
+      width: 100%;
+      height: 200px;
+    }
+  }
+}
+
+
+/** refine element ui dropdown */
+.el-dropdown-menu {
+  a {
+    display: block
+  }
+}
+
+.el-menu--collapse
+> div
+> .el-submenu
+> .el-submenu__title
+.el-submenu__icon-arrow {
+  display: none;
+}
+
+
+/** refine element ui el-date-picker */
+// fix date-picker ui bug in filter-item
+.el-range-editor.el-input__inner {
+  display: inline-flex !important;
+}
+// to fix el-date-picker css style
+.el-range-separator {
+  box-sizing: content-box;
+}
+
+.el-icon-arrow-down:before{
+    color: #c4c4c4;
+}
+
+
+/** refine element ui dialog */
+.el-dialog:not(.is-fullscreen) {
+  margin-top: 3vh !important;
+}
+
+.el-dialog__wrapper.scrollbar .el-dialog .el-dialog__body {
+  overflow: auto;
+  overflow-x: hidden;
+  max-height: 75vh;
+  padding: 20px 20px 20px;
+}
+// to fixed https://github.com/ElemeFE/element/issues/2461
+.el-dialog {
+  transform: none;
+  left: 0;
+  position: relative;
+  margin: 0 auto;
+}
+.el-dialog__body {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.el-dialog--center .el-dialog__body {
+  text-align: initial;
+  padding: 5px 20px 5px;
+}
+/*refine element ui drawer */
+.el-drawer__header {
+  margin-bottom: 15px;
+}
+
+/*refine element ui scrollbar */
+.el-scrollbar .el-scrollbar__wrap {
+  overflow-x: hidden !important;
+}
+.el-select-dropdown .el-scrollbar {
+  padding-bottom: 17px;
+}
+
+/*refine element ui button css */
+.small-padding {
+  .cell {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+.fixed-width {
+  .el-button--mini {
+    padding: 7px 10px;
+    width: 60px;
+  }
+}
+
+/*refine element ui pager css */
+.el-tooltip__popper{
+  max-width: 400px;
+}
+
+
+// 弹框公共样式
+.publicDialog{
+  .el-dialog{
+    .el-dialog__header{
+      .el-dialog__title {
+          line-height: 22px;
+          font-size: 16px;
+          color: #333;
+          font-weight: 600;
+      }
+    }
+    .el-dialog__body{
+      padding: 10px 20px 0;
+      max-height: 450px;
+      overflow: auto;
+      .formContent{
+        .el-form-item{
+          .el-form-item__label{
+            font-size: 13px;
+            color: #333;
+          }
+          .el-date-editor,.el-input .el-input__inner{width: 220px;}
+        }
+      }
+      .searchPublic{
+        .el-form-item {
+          margin-bottom: 10px;
+          margin-right: 10px;
+          .el-form-item__label{
+            font-size: 13px;
+            color: #333;
+          }
+          .el-date-editor,.el-select .el-input .el-input__inner,.el-input .el-input__inner{width: 160px;}
+        }
+      }
+      .especially{
+        width: 100%;
+        .el-form-item__content{width: 85%;}
+        .el-input .el-input__inner{width: 100% !important;}
+      }
+      .el-transfer-panel{overflow: auto !important;}
+    }
+    .el-dialog__footer{}
+  }
+}
+.tableBox{
+  margin: 10px 0 0 ;
+  .el-table{
+    tr>td,tr>th{text-align: center;}
+    tr>th{color:#444;font-size: 14px;}
+    tr>td{color:#555;font-size: 14px;}
+  }
+}

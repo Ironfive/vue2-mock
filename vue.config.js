@@ -22,9 +22,9 @@ module.exports = {
   lintOnSave: false, //关闭语法检查
   // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
   productionSourceMap: false,
-  // devServer: {
-  //   proxy: "http://localhost:3000",
-  // },
+  devServer: {
+    proxy: "http://localhost:8080",
+  },
   // devServer: {
   //   host: "0.0.0.0",
   //   port: port,
