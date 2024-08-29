@@ -1,0 +1,195 @@
+$el-font-familly: 'Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif';
+$color-disabled-txt: #606266;
+.mglr0{
+  margin-left: 0px!important;
+  margin-right: 0px!important;
+}
+.mt8{
+  margin-top: 8px!important;
+}
+.mt18{
+  margin-top: 18px!important;
+}
+.mb8{
+  margin-bottom: 8px!important;
+}
+.mb18{
+  margin-bottom: 18px!important;
+}
+//缺省图
+.nodata{
+  width:100%;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/**
+* 全局css样式布局处理
+*
+*/
+.el-input.is-disabled .el-input__inner, .el-textarea.is-disabled .el-textarea__inner{
+  background-color: #FFF!important;
+}
+.el-checkbox__input.is-disabled .el-checkbox__inner{
+  background-color: #fff!important;
+  border-color: #dcdfe6!important;
+}
+.el-checkbox__input.is-disabled.is-checked .el-checkbox__inner{
+  background-color: #409eff!important;
+  border-color: #409eff!important;
+}
+.el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
+  border-color: #FFF!important;
+}
+////禁止开启（预留高度：容易导致表单校验提示文字被遮盖）
+//.el-form-item--mini.el-form-item{
+//  margin-bottom: 8px!important;
+//}
+// 搜索条件 表单项 间距问题
+.form-item-mgb0 .el-form-item--mini.el-form-item{
+  margin-bottom: 0px!important;
+}
+.form-item-mgb10 .el-form-item--mini.el-form-item{
+  margin-bottom: 10px!important;
+}
+.form-item-mgb18 .el-form-item--mini.el-form-item{
+  margin-bottom: 18px!important;
+}
+.el-textarea__inner{
+  color: $color-disabled-txt !important;
+  font-size: 13px;
+  font-family: $el-font-familly;
+}
+
+
+// 搜索区域：时间区间选择器
+.date-picker-inline.el-date-editor--daterange.el-input__inner{
+  width: 130px;
+}
+/*disabled颜色*/
+.el-input.is-disabled .el-input__inner, .el-range-editor.is-disabled input,
+.el-checkbox.is-disabled .el-checkbox__label{
+  color: $color-disabled-txt !important;
+}
+
+
+
+/**
+  * 全局
+  * 详情页
+  * 对齐问题
+  */
+
+
+/**打印与详情区分*/
+.el-form.is-disabled {
+  //radio禁用后的label回显样式
+  .el-form-item__content{
+    label{
+      height: 28px;
+      line-height: 28px;
+      .el-radio__label{
+        color: $color-disabled-txt !important;
+      }
+    }
+  }
+  .el-form-item__label{
+    font-weight: 700!important;
+  }
+  //时间选择器
+  .el-date-editor.el-input .el-input__inner,
+  .el-input--prefix.el-input .el-input__inner{
+    padding-left: 15px;
+  }
+
+  ////多文本可滚动
+  ///*display: none; 设置不显示,必须加上防止行高不统一，但是加上会导致组件被display:none，建议使用el-tooltips进行el-input文本溢出处理*/
+  //.el-input--prefix.el-input{
+  //  overflow-x: scroll;
+  //  display: none;
+  //}
+
+  /**
+   * 表单内纯文本（非el-input）
+   * 使用方式
+    <el-form-item label="配方版本" prop="formulaVersion" v-if="this.dataPO.formulaVersion">
+      <span class="el-form-text">{{this.dataPO.formulaVersion}}</span>
+    </el-form-item>
+  */
+  .el-form-text{
+    padding-left: 15px;
+    font-size: 13px;
+    color: #606266 !important;
+  }
+  //单选框
+  .el-radio__input.is-disabled+span.el-radio__label{
+    padding-left: 15px;
+  }
+  .el-input.is-disabled .el-input-group__prepend{
+    display: none;
+  }
+  .el-switch.is-disabled{
+    margin-left: 15px;
+  }
+  .el-form-item--mini.el-form-item{
+    margin-bottom: 0!important;
+  }
+}
+//打印
+.printDom{
+  .el-form.is-disabled .el-form-item__label{
+    font-weight: normal!important;
+  }
+}
+//表格无数据
+//.no-table-data{
+//  padding: 20px 0!important;
+//}
+
+//---------------------------------------------------------------------
+/* 标准品印戳 图像作为 CSS 背景图 */
+.urgent-absolution{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width:120px;
+  height:95px;
+}
+.urgent {
+  background-image: url("../images/urgent.png");  /* 引用 SVG 图像 */
+  background-size: 120px auto;  /* 调整大小，使图像填满元素 */
+  background-position: 98% 70%;
+  background-repeat: no-repeat;  /* 防止图像重复出现 */
+  z-index: 100;
+}
+/** 提示框 宽度问题优化 */
+.el-tooltip__popper{ max-width:60% }
+/** 高级搜索 */
+.advanced-search{
+  .el-form-item--mini.el-form-item{
+    margin-bottom: 8px;
+  }
+  .el-form-item--mini.el-form-item:last-child{
+    margin-bottom: 18px;
+  }
+  .el-form-item--mini .el-form-item__label{
+    text-align: left;
+  }
+}
+
+//tooltip样式
+.tooltipItem{
+  position: relative;
+  .el-form-item__label{
+    padding-right: 22px;
+  }
+  .el-form-item__content{
+    .el-date-editor{width: 100% !important;}
+    .el-tooltip{
+      position: absolute;
+      left: -20px;
+      top: 6px;
+    }
+  }
+}

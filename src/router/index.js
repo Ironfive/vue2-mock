@@ -36,6 +36,11 @@ export const publicRouter = [
     name:'CaculateResult',
     component: ()=>import('@/pages/home/components/caculateResult'),
     meta: { title: "测算结果" },
+  },{
+  path:'/scrollPage',
+    name:'ScrollPage',
+    component: ()=>import('@/pages/animation/scrollPage'),
+    meta: { title: "滚动页面" },
   }
 ];
 export default new vueRouter({

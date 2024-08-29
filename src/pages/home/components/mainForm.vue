@@ -1,11 +1,5 @@
 <template>
   <div>
-    <el-dialog :close-on-click-modal="false" :close-on-press-escape="false" top="0" :modal="true" title="提示" :visible.sync="dialogVisible" :center="true" width="50%" :show-close="false" :before-close="handleClose" draggable :fullscreen="fullscreen">
-      <div slot="title">
-        <span >工商业储能测算</span>
-        <i class="el-icon-close" style="cursor: pointer; float: right; margin-right: 8px" @click="handleClose"></i>
-        <i class="el-icon-full-screen" style="cursor: pointer; float: right; margin-right: 8px" @click="fullScreenFun"></i>
-      </div>
       <div class="customForm">
       <el-form size="mini" :model="formValues" :rules="rules">
         <el-card>
@@ -217,7 +211,6 @@
         </el-card>
       </el-form>
       </div>
-    </el-dialog>
     <user-info :visible.sync="showUserInfo"></user-info>
   </div>
 </template>
